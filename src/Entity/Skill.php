@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Enum\FieldCategory;
 use App\Repository\SkillRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SkillRepository::class)
@@ -18,9 +19,13 @@ class Skill
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 100)]
     private ?string $name = null;
 
     #[ORM\Column(enumType: FieldCategory::class)]
+    #[Assert\NotBlank]
+    #[Assert\Choice(callback: [FieldCategory::class, 'toArray'])]
     private ?FieldCategory $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'skills')]
