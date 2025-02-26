@@ -2,20 +2,20 @@
 
 namespace App\Repository;
 
-use App\Entity\User;
+use App\Entity\Skill;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<User>
+ * @extends ServiceEntityRepository<Skill>
  */
-class UserRepository extends ServiceEntityRepository
+class SkillRepository extends ServiceEntityRepository
 {
     /**
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, User::class);
+        parent::__construct($registry, Skill::class);
     }
 }

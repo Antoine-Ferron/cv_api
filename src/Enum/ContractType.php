@@ -2,6 +2,9 @@
 
 namespace App\Enum;
 
+/**
+ * @method static ContractType CDI()
+ */
 enum ContractType: string
 {
     case CDI = 'cdi';
@@ -11,4 +14,3 @@ enum ContractType: string
     case ALTERNANCE = 'alternance';
     case FREELANCE = 'freelance';
 }
-

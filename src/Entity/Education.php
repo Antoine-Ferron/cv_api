@@ -2,16 +2,15 @@
 
 namespace App\Entity;
 
-use App\Enum\ContractType;
-use App\Repository\ExperienceRepository;
+use App\Repository\EducationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ExperienceRepository::class)
+ * @ORM\Entity(repositoryClass=EducationRepository::class)
  */
-#[ORM\Entity(repositoryClass: ExperienceRepository::class)]
-class Experience
+#[ORM\Entity(repositoryClass: EducationRepository::class)]
+class Education
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,27 +18,21 @@ class Experience
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $company = null;
+    private ?string $school = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $position = null;
-
-    #[ORM\Column(enumType: ContractType::class)]
-    private ?ContractType $contractType = null;
+    private ?string $degree = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $startDate = null;
 
     #[ORM\Column]
-    private ?bool $isCurrentlyEmployed = null;
+    private ?bool $isCurrentlyEnroled = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $endDate = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
-
-    #[ORM\ManyToOne(inversedBy: 'experiences')]
+    #[ORM\ManyToOne(inversedBy: 'education')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
@@ -54,19 +47,19 @@ class Experience
     /**
      * @return string|null
      */
-    public function getCompany(): ?string
+    public function getSchool(): ?string
     {
-        return $this->company;
+        return $this->school;
     }
 
     /**
-     * @param string $company
+     * @param string $school
      *
      * @return $this
      */
-    public function setCompany(string $company): static
+    public function setSchool(string $school): static
     {
-        $this->company = $company;
+        $this->school = $school;
 
         return $this;
     }
@@ -74,39 +67,19 @@ class Experience
     /**
      * @return string|null
      */
-    public function getPosition(): ?string
+    public function getDegree(): ?string
     {
-        return $this->position;
+        return $this->degree;
     }
 
     /**
-     * @param string $position
+     * @param string $degree
      *
      * @return $this
      */
-    public function setPosition(string $position): static
+    public function setDegree(string $degree): static
     {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    /**
-     * @return ContractType|null
-     */
-    public function getContractType(): ?ContractType
-    {
-        return $this->contractType;
-    }
-
-    /**
-     * @param ContractType $contractType
-     *
-     * @return $this
-     */
-    public function setContractType(ContractType $contractType): static
-    {
-        $this->contractType = $contractType;
+        $this->degree = $degree;
 
         return $this;
     }
@@ -134,19 +107,19 @@ class Experience
     /**
      * @return bool|null
      */
-    public function isCurrentlyEmployed(): ?bool
+    public function isCurrentlyEnroled(): ?bool
     {
-        return $this->isCurrentlyEmployed;
+        return $this->isCurrentlyEnroled;
     }
 
     /**
-     * @param bool $isCurrentlyEmployed
+     * @param bool      $isCurrentlyEnroled
      *
      * @return $this
      */
-    public function setIsCurrentlyEmployed(bool $isCurrentlyEmployed): static
+    public function setIsCurrentlyEnroled(bool $isCurrentlyEnroled): static
     {
-        $this->isCurrentlyEmployed = $isCurrentlyEmployed;
+        $this->isCurrentlyEnroled = $isCurrentlyEnroled;
 
         return $this;
     }
@@ -167,26 +140,6 @@ class Experience
     public function setEndDate(?\DateTimeInterface $endDate): static
     {
         $this->endDate = $endDate;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string|null $description
-     *
-     * @return $this
-     */
-    public function setDescription(?string $description): static
-    {
-        $this->description = $description;
 
         return $this;
     }
