@@ -25,7 +25,7 @@ class Skill
 
     #[ORM\Column(enumType: FieldCategory::class)]
     #[Assert\NotBlank]
-    #[Assert\Choice(callback: [FieldCategory::class, 'toArray'])]
+    #[Assert\Choice(callback: [FieldCategory::class, 'values'])]
     private ?FieldCategory $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'skills')]

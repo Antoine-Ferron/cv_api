@@ -14,4 +14,9 @@ enum FieldCategory: string
     case METHODS = 'Méthodes';
     case ORM = 'ORM';
     case LANGUAGE = 'Langues';
+
+    public static function values(): array
+    {
+        return array_column(self::cases(), 'value');
+    }
 }

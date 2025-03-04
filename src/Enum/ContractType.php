@@ -13,4 +13,9 @@ enum ContractType: string
     case STAGE = 'stage';
     case ALTERNANCE = 'alternance';
     case FREELANCE = 'freelance';
+
+    public static function values(): array
+    {
+        return array_column(self::cases(), 'value');
+    }
 }

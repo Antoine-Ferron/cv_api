@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Enum\ContractType;
 use App\Repository\ExperienceRepository;
 use Doctrine\DBAL\Types\Types;
@@ -12,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=ExperienceRepository::class)
  */
 #[ORM\Entity(repositoryClass: ExperienceRepository::class)]
+#[ApiResource]
 class Experience
 {
     #[ORM\Id]
@@ -31,7 +33,7 @@ class Experience
 
     #[ORM\Column(enumType: ContractType::class)]
     #[Assert\NotBlank]
-    #[Assert\Choice(callback: [ContractType::class, 'toArray'])]
+    #[Assert\Choice(callback: [ContractType::class, 'values'])]
     private ?ContractType $contractType = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
